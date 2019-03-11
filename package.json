@@ -6,6 +6,8 @@
     "@material-ui/core": "next",
     "@material-ui/styles": "next",
     "gatsby": "latest",
+    "gatsby-plugin-manifest": "^2.0.23",
+    "gatsby-plugin-offline": "^2.0.25",
     "react": "latest",
     "react-dom": "latest"
   },
