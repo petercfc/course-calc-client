@@ -1,18 +1,19 @@
-import React from "react"
-import Button from "@material-ui/core/Button"
-import Typography from "@material-ui/core/Typography"
-import { withStyles } from "@material-ui/styles"
-import Link from "../components/Link"
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/styles';
+import Link from '../components/Link';
 
 const styles = theme => ({
   root: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: theme.spacing(20),
   },
-})
+});
 
 function About(props) {
-  const { classes } = props
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
@@ -29,7 +30,11 @@ function About(props) {
         Do nothing button
       </Button>
     </div>
-  )
+  );
 }
 
-export default withStyles(styles)(About)
+About.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(About);

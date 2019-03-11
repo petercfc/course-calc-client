@@ -1,44 +1,19 @@
 {
   "name": "course-calc-client",
+  "version": "4.0.0",
   "private": true,
-  "description": "Course and Credit Calculator",
-  "version": "0.1.0",
-  "author": "Peter Arnold <thepeterarnold@gmail.com>",
   "dependencies": {
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/styles": "^3.0.0-alpha.10",
-    "gatsby": "^2.1.29",
-    "gatsby-image": "^2.0.31",
-    "gatsby-plugin-manifest": "^2.0.22",
-    "gatsby-plugin-material-ui": "^1.2.4",
-    "gatsby-plugin-offline": "^2.0.24",
-    "gatsby-plugin-sharp": "^2.0.25",
-    "gatsby-source-filesystem": "^2.0.23",
-    "gatsby-source-graphql": "^2.0.13",
-    "gatsby-transformer-sharp": "^2.1.15",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "@material-ui/core": "next",
+    "@material-ui/styles": "next",
+    "gatsby": "latest",
+    "react": "latest",
+    "react-dom": "latest"
   },
-  "devDependencies": {
-    "prettier": "^1.16.4"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
+    "build": "gatsby build",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/petercfc/course-calc-client"
-  },
-  "bugs": {
-    "url": "https://github.com/petercfc/course-calc-client/issues"
+    "start": "npm run serve",
+    "heroku-postbuild": "npm run build"
   }
 }

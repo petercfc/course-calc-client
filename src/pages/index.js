@@ -1,30 +1,30 @@
-import React from "react"
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogActions from "@material-ui/core/DialogActions"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/styles"
-import Link from "../components/Link"
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
+import Link from '../components/Link';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: theme.spacing(20),
   },
-}))
+}));
 
 function Index() {
-  const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   const handleClick = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   return (
     <div className={classes.root}>
@@ -54,7 +54,7 @@ function Index() {
         Super Secret Password
       </Button>
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;
