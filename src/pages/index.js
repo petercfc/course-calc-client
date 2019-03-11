@@ -1,35 +1,60 @@
 import React from "react"
-import { Link } from "gatsby"
-
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Button from "@material-ui/core/Button"
+import Dialog from "@material-ui/core/Dialog"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import DialogActions from "@material-ui/core/DialogActions"
 import Typography from "@material-ui/core/Typography"
-import { withStyles } from "@material-ui/core/styles"
-import withRoot from "../withRoot"
+import { makeStyles } from "@material-ui/styles"
+import Link from "../components/Link"
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     textAlign: "center",
-    paddingTop: theme.spacing.unit * 20,
+    paddingTop: theme.spacing(20),
   },
-})
+}))
 
-const IndexPage = () => (
-  <Layout>
-    <SEO
-      title="Course and Credit Calculator"
-      keywords={[`gatsby`, `application`, `react`]}
-    />
-    <Typography variant="h3" gutterBottom>
-      Getting Started,
-    </Typography>
-    <p>
-      This application will help you calculate the credits and courses still
-      required to graduate. This is based on the classes that you have currently
-      passed.
-    </p>
-    <Link to="/calc/">Start Course Calculator</Link>
-  </Layout>
-)
+function Index() {
+  const classes = useStyles()
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const handleClick = () => {
+    setOpen(true)
+  }
 
-export default withRoot(withStyles(styles)(IndexPage))
+  return (
+    <div className={classes.root}>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Super Secret Password</DialogTitle>
+        <DialogContent>
+          <DialogContentText>1-2-3-4-5</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={handleClose}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Typography variant="h4" gutterBottom>
+        Material-UI
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        home page
+      </Typography>
+      <Typography gutterBottom>
+        <Link color="secondary" to="/about">
+          Go to the about page
+        </Link>
+      </Typography>
+      <Button variant="contained" color="secondary" onClick={handleClick}>
+        Super Secret Password
+      </Button>
+    </div>
+  )
+}
+
+export default Index
