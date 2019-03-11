@@ -8,6 +8,7 @@
     "gatsby": "latest",
     "gatsby-plugin-manifest": "^2.0.23",
     "gatsby-plugin-offline": "^2.0.25",
+    "gatsby-source-graphql": "^2.0.14",
     "react": "latest",
     "react-dom": "latest"
   },
