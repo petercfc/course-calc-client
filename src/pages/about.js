@@ -1,10 +1,9 @@
 import React from "react";
-import { graphql } from "gatsby";
-import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
+import { graphql } from "gatsby";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
-import Link from "../components/Link";
+import List from "../components/list";
 
 const styles = theme => ({
   root: {
@@ -13,10 +12,13 @@ const styles = theme => ({
   }
 });
 
-function Courses(props) {
+function About(props) {
   const { classes, data } = props;
+  console.log(data);
+
   return (
     <div className={classes.root}>
+      <List />
       <Typography variant="h4" component="h1" gutterBottom>
         Courses
       </Typography>
@@ -29,11 +31,7 @@ function Courses(props) {
   );
 }
 
-Courses.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(Courses);
+export default withStyles(styles)(About);
 
 export const query = graphql`
   query {

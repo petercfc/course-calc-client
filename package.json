@@ -1,22 +1,19 @@
 {
-  "name": "course-calc-client",
+  "name": "gatsby-next",
   "version": "4.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "next",
     "@material-ui/styles": "next",
     "gatsby": "latest",
-    "gatsby-plugin-manifest": "^2.0.23",
-    "gatsby-plugin-offline": "^2.0.25",
     "gatsby-source-graphql": "^2.0.14",
     "react": "latest",
+    "react-beautiful-dnd": "^10.1.0",
     "react-dom": "latest"
   },
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve",
-    "start": "npm run serve",
-    "heroku-postbuild": "gatsby build"
+    "serve": "gatsby serve"
   }
 }
