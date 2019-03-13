@@ -8,7 +8,8 @@ import List from "../components/list";
 const styles = theme => ({
   root: {
     textAlign: "center",
-    paddingTop: theme.spacing(20)
+    paddingTop: theme.spacing(20),
+    listStyleType: "none"
   }
 });
 
