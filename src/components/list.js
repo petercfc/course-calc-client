@@ -13,6 +13,7 @@ import {
 import RootRef from "@material-ui/core/RootRef";
 import InboxIcon from "@material-ui/icons/Inbox";
 import EditIcon from "@material-ui/icons/Edit";
+import Typography from "@material-ui/core/Typography";
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -124,13 +125,16 @@ export default class App extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId="droppable2">
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {this.state.items.map((item, index) => (
+              <Typography variant="h5" gutterBottom>
+                Completed
+              </Typography>
+              {this.state.selected.map((item, index) => (
                 <Draggable
                   key={item.sys.id}
                   draggableId={item.sys.id}
@@ -167,13 +171,16 @@ export default class App extends Component {
             </div>
           )}
         </Droppable>
-        <Droppable droppableId="droppable2">
+        <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {this.state.selected.map((item, index) => (
+              <Typography variant="h5" gutterBottom>
+                Available
+              </Typography>
+              {this.state.items.map((item, index) => (
                 <Draggable
                   key={item.sys.id}
                   draggableId={item.sys.id}

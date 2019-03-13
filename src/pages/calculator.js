@@ -19,9 +19,6 @@ function Calculator(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Courses
-      </Typography>
       <List data={data} />
     </div>
   );
