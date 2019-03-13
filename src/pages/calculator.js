@@ -13,7 +13,7 @@ const styles = theme => ({
   }
 });
 
-function About(props) {
+function Calculator(props) {
   const { classes, data } = props;
   console.log(data);
 
@@ -27,7 +27,7 @@ function About(props) {
   );
 }
 
-export default withStyles(styles)(About);
+export default withStyles(styles)(Calculator);
 
 export const query = graphql`
   query {
