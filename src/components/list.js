@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { StaticQuery, graphql } from "gatsby";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  IconButton,
+  ListItemSecondaryAction
+} from "@material-ui/core";
+import RootRef from "@material-ui/core/RootRef";
+import InboxIcon from "@material-ui/icons/Inbox";
+import EditIcon from "@material-ui/icons/Edit";
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -39,22 +50,16 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
-
   // styles we need to apply on draggables
-  ...draggableStyle
+  ...draggableStyle,
+
+  ...(isDragging && {
+    background: "rgb(235,235,235)"
+  })
 });
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  width: 250
+  //background: isDraggingOver ? 'lightblue' : 'lightgrey',
 });
 
 export default class App extends Component {
@@ -117,13 +122,6 @@ export default class App extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
-    console.log("orig");
-    console.log(this.props.data.prisma.routeCollection.items);
-    console.log("items");
-    console.log(this.props.data.prisma.routeCollection.items.slice(1));
-    console.log("selected");
-    console.log([this.props.data.prisma.routeCollection.items[0]]);
-
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable">
@@ -139,17 +137,29 @@ export default class App extends Component {
                   index={index}
                 >
                   {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {item.name}
-                    </div>
+                    <RootRef rootRef={provided.innerRef}>
+                      <ListItem
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={item.name}
+                          secondary={item.sys.id}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton>
+                            <EditIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    </RootRef>
                   )}
                 </Draggable>
               ))}
@@ -170,17 +180,29 @@ export default class App extends Component {
                   index={index}
                 >
                   {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {item.name}
-                    </div>
+                    <RootRef rootRef={provided.innerRef}>
+                      <ListItem
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={item.name}
+                          secondary={item.sys.id}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton>
+                            <EditIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    </RootRef>
                   )}
                 </Draggable>
               ))}

@@ -18,15 +18,10 @@ function About(props) {
 
   return (
     <div className={classes.root}>
-      <List data={data} />
       <Typography variant="h4" component="h1" gutterBottom>
         Courses
       </Typography>
-      {data.prisma.routeCollection.items.map((item, i) => (
-        <Typography key={i} variant="subtitle1" component="h2" gutterBottom>
-          {item.name} - {item.sys.id}
-        </Typography>
-      ))}
+      <List data={data} />
     </div>
   );
 }
