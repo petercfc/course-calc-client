@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { StaticQuery, graphql } from "gatsby";
 
 // fake data generator
 const getItems = (count, offset = 0) =>
   Array.from({ length: count }, (v, k) => k).map(k => ({
     id: `item-${k + offset}`,
-    content: `item ${k + offset}`
+    name: `item ${k + offset}`
   }));
 
 // a little function to help us with reordering the result
@@ -56,10 +57,12 @@ const getListStyle = isDraggingOver => ({
   width: 250
 });
 
-export default class List extends Component {
+export default class App extends Component {
   state = {
-    items: getItems(10),
-    selected: getItems(5, 10)
+    items: this.props.data.prisma.routeCollection.items.slice(1),
+    selected: [this.props.data.prisma.routeCollection.items[0]]
+    // items: getItems(10),
+    // selected: getItems(5, 10)
   };
 
   /**
@@ -114,6 +117,13 @@ export default class List extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
+    console.log("orig");
+    console.log(this.props.data.prisma.routeCollection.items);
+    console.log("items");
+    console.log(this.props.data.prisma.routeCollection.items.slice(1));
+    console.log("selected");
+    console.log([this.props.data.prisma.routeCollection.items[0]]);
+
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable">
@@ -123,7 +133,11 @@ export default class List extends Component {
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {this.state.items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable
+                  key={item.sys.id}
+                  draggableId={item.sys.id}
+                  index={index}
+                >
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -134,7 +148,7 @@ export default class List extends Component {
                         provided.draggableProps.style
                       )}
                     >
-                      {item.content}
+                      {item.name}
                     </div>
                   )}
                 </Draggable>
@@ -150,7 +164,11 @@ export default class List extends Component {
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {this.state.selected.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable
+                  key={item.sys.id}
+                  draggableId={item.sys.id}
+                  index={index}
+                >
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -161,7 +179,7 @@ export default class List extends Component {
                         provided.draggableProps.style
                       )}
                     >
-                      {item.content}
+                      {item.name}
                     </div>
                   )}
                 </Draggable>
