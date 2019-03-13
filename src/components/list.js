@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { StaticQuery, graphql } from "gatsby";
 import {
   List,
   ListItem,
@@ -12,7 +10,9 @@ import {
 } from "@material-ui/core";
 import RootRef from "@material-ui/core/RootRef";
 import InboxIcon from "@material-ui/icons/Inbox";
-import EditIcon from "@material-ui/icons/Edit";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import Typography from "@material-ui/core/Typography";
 
 // fake data generator
@@ -38,13 +38,10 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
-
   destClone.splice(droppableDestination.index, 0, removed);
-
   const result = {};
   result[droppableSource.droppableId] = sourceClone;
   result[droppableDestination.droppableId] = destClone;
-
   return result;
 };
 
@@ -86,11 +83,12 @@ export default class App extends Component {
   onDragEnd = result => {
     const { source, destination } = result;
 
-    // dropped outside the list
+    // dropped outside the list do nothing
     if (!destination) {
       return;
     }
 
+    // if dropped in the same list then reorder the list
     if (source.droppableId === destination.droppableId) {
       const items = reorder(
         this.getList(source.droppableId),
@@ -112,12 +110,39 @@ export default class App extends Component {
         source,
         destination
       );
-
       this.setState({
         items: result.droppable,
         selected: result.droppable2
       });
     }
+  };
+
+  //Handle moving an item from the completed list to the available list
+  handleRemove = id => {
+    const result = move(
+      this.getList("droppable2"),
+      this.getList("droppable"),
+      { index: 0, droppableId: "droppable2" },
+      { index: 0, droppableId: "droppable" }
+    );
+    this.setState({
+      items: result.droppable,
+      selected: result.droppable2
+    });
+  };
+
+  //Handle moving an item from the available list to the completed list
+  handleAdd = id => {
+    const result = move(
+      this.getList("droppable"),
+      this.getList("droppable2"),
+      { index: 0, droppableId: "droppable" },
+      { index: 0, droppableId: "droppable2" }
+    );
+    this.setState({
+      items: result.droppable,
+      selected: result.droppable2
+    });
   };
 
   // Normally you would want to split things out into separate components.
@@ -151,15 +176,18 @@ export default class App extends Component {
                         )}
                       >
                         <ListItemIcon>
-                          <InboxIcon />
+                          <DragIndicatorIcon />
                         </ListItemIcon>
                         <ListItemText
                           primary={item.name}
                           secondary={item.sys.id}
                         />
                         <ListItemSecondaryAction>
-                          <IconButton>
-                            <EditIcon />
+                          <IconButton
+                            color="secondary"
+                            onClick={() => this.handleRemove(item.sys.id)}
+                          >
+                            <RemoveCircleIcon />
                           </IconButton>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -197,15 +225,18 @@ export default class App extends Component {
                         )}
                       >
                         <ListItemIcon>
-                          <InboxIcon />
+                          <DragIndicatorIcon />
                         </ListItemIcon>
                         <ListItemText
                           primary={item.name}
                           secondary={item.sys.id}
                         />
                         <ListItemSecondaryAction>
-                          <IconButton>
-                            <EditIcon />
+                          <IconButton
+                            color="primary"
+                            onClick={() => this.handleAdd(item.sys.id)}
+                          >
+                            <AddCircleIcon />
                           </IconButton>
                         </ListItemSecondaryAction>
                       </ListItem>
