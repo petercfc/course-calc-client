@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 import Link from "../components/Link";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +30,10 @@ function Index() {
 
   return (
     <div className={classes.root}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Course Credit Calculator</title>
+      </Helmet>
       <Typography variant="h4" gutterBottom>
         Course Credit Calculator
       </Typography>

@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import List from "../components/list";
+import { Helmet } from "react-helmet";
 
 const styles = theme => ({
   root: {
@@ -19,6 +20,10 @@ function Calculator(props) {
 
   return (
     <div className={classes.root}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Course Credit Calculator</title>
+      </Helmet>
       <List data={data} />
     </div>
   );
