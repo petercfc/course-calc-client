@@ -14,6 +14,7 @@
   },
   "scripts": {
     "develop": "gatsby develop",
+    "heroku-postbuild": "gatsby build",
     "build": "gatsby build",
     "start": "gatsby serve"
   }
