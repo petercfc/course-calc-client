@@ -8,7 +8,7 @@ module.exports = {
         // This is field under which it's accessible
         fieldName: "prisma",
         // Url to query from
-        url: "https://api.cagefreeclimbing.com/"
+        url: "https://course-credit-api.herokuapp.com/graphql"
       }
     },
     {

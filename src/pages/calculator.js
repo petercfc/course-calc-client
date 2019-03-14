@@ -29,13 +29,9 @@ export default withStyles(styles)(Calculator);
 export const query = graphql`
   query {
     prisma {
-      routeCollection {
-        items {
-          sys {
-            id
-          }
-          name
-        }
+      courses {
+        name
+        id
       }
     }
   }

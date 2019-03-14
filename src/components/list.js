@@ -62,8 +62,8 @@ const getListStyle = isDraggingOver => ({
 
 export default class App extends Component {
   state = {
-    items: this.props.data.prisma.routeCollection.items.slice(1),
-    selected: [this.props.data.prisma.routeCollection.items[0]]
+    items: this.props.data.prisma.courses.slice(1),
+    selected: [this.props.data.prisma.courses[0]]
     // items: getItems(10),
     // selected: getItems(5, 10)
   };
@@ -160,11 +160,7 @@ export default class App extends Component {
                 Completed
               </Typography>
               {this.state.selected.map((item, index) => (
-                <Draggable
-                  key={item.sys.id}
-                  draggableId={item.sys.id}
-                  index={index}
-                >
+                <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(provided, snapshot) => (
                     <RootRef rootRef={provided.innerRef}>
                       <ListItem
@@ -178,14 +174,11 @@ export default class App extends Component {
                         <ListItemIcon>
                           <DragIndicatorIcon />
                         </ListItemIcon>
-                        <ListItemText
-                          primary={item.name}
-                          secondary={item.sys.id}
-                        />
+                        <ListItemText primary={item.name} secondary={item.id} />
                         <ListItemSecondaryAction>
                           <IconButton
                             color="secondary"
-                            onClick={() => this.handleRemove(item.sys.id)}
+                            onClick={() => this.handleRemove(item.id)}
                           >
                             <RemoveCircleIcon />
                           </IconButton>
@@ -209,11 +202,7 @@ export default class App extends Component {
                 Available
               </Typography>
               {this.state.items.map((item, index) => (
-                <Draggable
-                  key={item.sys.id}
-                  draggableId={item.sys.id}
-                  index={index}
-                >
+                <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(provided, snapshot) => (
                     <RootRef rootRef={provided.innerRef}>
                       <ListItem
@@ -227,14 +216,11 @@ export default class App extends Component {
                         <ListItemIcon>
                           <DragIndicatorIcon />
                         </ListItemIcon>
-                        <ListItemText
-                          primary={item.name}
-                          secondary={item.sys.id}
-                        />
+                        <ListItemText primary={item.name} secondary={item.id} />
                         <ListItemSecondaryAction>
                           <IconButton
                             color="primary"
-                            onClick={() => this.handleAdd(item.sys.id)}
+                            onClick={() => this.handleAdd(item.id)}
                           >
                             <AddCircleIcon />
                           </IconButton>
