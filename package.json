@@ -1,25 +1,40 @@
 {
-  "name": "gatsby-next",
-  "version": "4.0.0",
+  "name": "course-credit-calc",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "next",
     "@material-ui/icons": "^3.0.2",
-    "@material-ui/styles": "next",
-    "gatsby": "latest",
-    "gatsby-plugin-manifest": "^2.0.24",
-    "gatsby-plugin-offline": "^2.0.25",
-    "gatsby-plugin-react-helmet": "^3.0.9",
-    "gatsby-source-graphql": "^2.0.14",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-cache-persist": "^0.1.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-http": "^1.5.14",
+    "apollo-link-retry": "^2.2.13",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "jss": "next",
+    "prop-types": "latest",
     "react": "latest",
+    "react-apollo": "^2.5.2",
     "react-beautiful-dnd": "^10.1.0",
     "react-dom": "latest",
-    "react-helmet": "^5.2.0"
+    "react-material-ui-form-validator": "^2.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "latest",
+    "serve": "^10.1.2"
   },
   "scripts": {
-    "develop": "gatsby develop",
-    "heroku-postbuild": "gatsby build",
-    "build": "gatsby build",
-    "start": "gatsby serve"
-  }
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

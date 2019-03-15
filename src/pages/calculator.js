@@ -1,43 +1,36 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { graphql } from "gatsby";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/styles";
-import List from "../components/list";
-import { Helmet } from "react-helmet";
+import { withStyles } from "@material-ui/core/styles";
+import withRoot from "../withRoot";
+import CreateStudentButton from "../components/createStudentButton";
+import EditStudentButton from "../components/editStudentButton";
+import SelectStudentInput from "../components/selectStudentInput";
 
 const styles = theme => ({
   root: {
     textAlign: "center",
     paddingTop: theme.spacing(20),
-    listStyleType: "none"
+    padding: 24
   }
 });
 
-function Calculator(props) {
-  const { classes, data } = props;
-  console.log(data);
-
-  return (
-    <div className={classes.root}>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Course Credit Calculator</title>
-      </Helmet>
-      <List data={data} />
-    </div>
-  );
+class Calculator extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <Typography variant="h4" gutterBottom>
+          Course Credit Calculator
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Determine the courses and number of credits required to graduate.
+        </Typography>
+        <CreateStudentButton />
+        <SelectStudentInput />
+        <EditStudentButton />
+      </div>
+    );
+  }
 }
 
-export default withStyles(styles)(Calculator);
-
-export const query = graphql`
-  query {
-    prisma {
-      courses {
-        name
-        id
-      }
-    }
-  }
-`;
+export default withRoot(withStyles(styles)(Calculator));

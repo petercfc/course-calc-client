@@ -9,18 +9,17 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import RootRef from "@material-ui/core/RootRef";
-import InboxIcon from "@material-ui/icons/Inbox";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import Typography from "@material-ui/core/Typography";
 
-// fake data generator
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k + offset}`,
-    name: `item ${k + offset}`
-  }));
+// // fake data generator
+// const getItems = (count, offset = 0) =>
+//   Array.from({ length: count }, (v, k) => k).map(k => ({
+//     id: `item-${k + offset}`,
+//     name: `item ${k + offset}`
+//   }));
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -62,8 +61,8 @@ const getListStyle = isDraggingOver => ({
 
 export default class App extends Component {
   state = {
-    items: this.props.data.prisma.courses.slice(1),
-    selected: [this.props.data.prisma.courses[0]]
+    items: this.props.data.courses.slice(1),
+    selected: [this.props.data.courses[0]]
     // items: getItems(10),
     // selected: getItems(5, 10)
   };
