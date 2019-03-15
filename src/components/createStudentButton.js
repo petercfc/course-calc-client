@@ -5,14 +5,16 @@ import React from "react";
 import withRoot from "../withRoot";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
 
 //components
 import CreateStudentDialog from "./createStudentDialog";
 
 // create material-ui styles init with theme
 const styles = theme => ({
-  root: {},
-  button: { paddingLeft: 16 }
+  root: {}
 });
 
 // main class
@@ -40,7 +42,7 @@ class CreateStudentButton extends React.Component {
     return (
       <div className={classes.root}>
         <Button
-          className={classes.button}
+          variant="outlined"
           color="primary"
           onClick={this.handleClickOpen}
         >
