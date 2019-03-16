@@ -46,15 +46,15 @@ cache.writeData({
 // client.onResetStore(() => cache.writeData({ data }));
 
 // wait for cache to load before init
-waitOnCache.then(() => {
-  // render index page wrapped in apollo client
-  ReactDOM.render(
-    <ApolloProvider client={client}>
-      <Index />
-    </ApolloProvider>,
-    document.querySelector("#root")
-  );
-});
+// waitOnCache.then(() => {
+// render index page wrapped in apollo client
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <Index />
+  </ApolloProvider>,
+  document.querySelector("#root")
+);
+// });
 
 // register service worker
 serviceWorker.register();

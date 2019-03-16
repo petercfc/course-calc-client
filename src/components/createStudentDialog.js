@@ -5,6 +5,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 // apollo
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import { GET_ALL_STUDENTS } from "./students";
 
 // material-ui
 import withRoot from "../withRoot";
@@ -25,6 +26,7 @@ const styles = theme => ({
 const CREATE_STUDENT = gql`
   mutation createStudent($data: StudentCreateInput!) {
     createStudent(data: $data) {
+      id
       name
     }
   }
@@ -56,7 +58,15 @@ class CreateStudentDialog extends React.Component {
   render() {
     const { classes, onClose, ...other } = this.props;
     return (
-      <Mutation mutation={CREATE_STUDENT}>
+      <Mutation
+        mutation={CREATE_STUDENT}
+        variables={{ data: { name: this.state.name } }}
+        update={(proxy, { data: { getAllStudents } }) => {
+          const data = proxy.readQuery({ query: GET_ALL_STUDENTS });
+          data.students.push(getAllStudents);
+          proxy.writeQuery({ query: GET_ALL_STUDENTS, data });
+        }}
+      >
         {(createStudent, { data }) => (
           <div className={classes.root}>
             <Dialog
@@ -68,9 +78,7 @@ class CreateStudentDialog extends React.Component {
                 ref="form"
                 onSubmit={e => {
                   e.preventDefault();
-                  createStudent({
-                    variables: { data: { name: this.state.name } }
-                  });
+                  createStudent();
                   this.resetTextField();
                   this.handleClose();
                 }}

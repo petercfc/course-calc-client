@@ -16,7 +16,7 @@ const styles = theme => ({
   root: {}
 });
 
-const GET_ALL_STUDENTS = gql`
+export const GET_ALL_STUDENTS = gql`
   query getAllStudents {
     students {
       id
@@ -29,18 +29,44 @@ const DELETE_STUDENT = gql`
   mutation deleteStudent($id: ID!) {
     deleteStudent(where: { id: $id }) {
       id
+      name
     }
   }
 `;
 
 // main class
 class Students extends React.Component {
+  //update cache on delete
+  update = (cache, { data: { deleteStudent } }) => {
+    const { students } = cache.readQuery({ query: GET_ALL_STUDENTS });
+    const compareId = deleteStudent.id;
+
+    const result = students.filter(student => {
+      const studenId = student.id;
+      return studenId !== compareId;
+    });
+    console.log("result");
+    console.log(result);
+    try {
+      cache.writeQuery({
+        query: GET_ALL_STUDENTS,
+        data: {
+          students: result
+        },
+        variables: {
+          id: compareId
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // render main
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Mutation mutation={DELETE_STUDENT}>
+        <Mutation mutation={DELETE_STUDENT} update={this.update}>
           {(deleteStudent, { data }) => (
             <Query query={GET_ALL_STUDENTS}>
               {({ loading, error, data }) => {
