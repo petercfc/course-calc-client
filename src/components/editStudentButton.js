@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 //components
-import CreateStudentDialog from "./createStudentDialog";
+import EditStudentDialog from "./editStudentDialog";
 
 // create material-ui styles init with theme
 const styles = theme => ({
@@ -16,7 +16,7 @@ const styles = theme => ({
 });
 
 // main class
-class CreateStudentButton extends React.Component {
+class EditStudentButton extends React.Component {
   // init state
   state = {
     open: false
@@ -44,16 +44,13 @@ class CreateStudentButton extends React.Component {
           color="primary"
           onClick={this.handleClickOpen}
         >
-          Create Student
+          Edit Student
         </Button>
-        <CreateStudentDialog
-          open={this.state.open}
-          onClose={this.handleClose}
-        />
+        <EditStudentDialog open={this.state.open} onClose={this.handleClose} />
       </div>
     );
   }
 }
 
 // export main with material-ui styles
-export default withRoot(withStyles(styles)(CreateStudentButton));
+export default withRoot(withStyles(styles)(EditStudentButton));

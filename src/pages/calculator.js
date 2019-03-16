@@ -3,11 +3,14 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 import CreateStudentButton from "../components/createStudentButton";
+import EditStudentButton from "../components/editStudentButton";
+import SelectStudentInput from "../components/selectStudentInput";
 
 const styles = theme => ({
   root: {
     textAlign: "center",
-    paddingTop: theme.spacing(20)
+    paddingTop: theme.spacing(20),
+    padding: 24
   }
 });
 
@@ -23,6 +26,8 @@ class Calculator extends React.Component {
           Determine the courses and number of credits required to graduate.
         </Typography>
         <CreateStudentButton />
+        <SelectStudentInput />
+        <EditStudentButton />
       </div>
     );
   }

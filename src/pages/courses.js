@@ -5,8 +5,6 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import withRoot from "../withRoot";
 import List from "../components/list";
-import SelectStudent from "../components/selectStudent";
-import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -38,22 +36,7 @@ class Courses extends React.Component {
         <Typography variant="h4" gutterBottom>
           List of Courses
         </Typography>
-        <Typography variant="subtitle1">
-          Selected: {this.state.selectedValue}
-        </Typography>
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.handleClickOpen}
-        >
-          Select Student
-        </Button>
-        <SelectStudent
-          selectedValue={this.state.selectedValue}
-          open={this.state.open}
-          onClose={this.handleClose}
-        />
         <Query
           query={gql`
             {
