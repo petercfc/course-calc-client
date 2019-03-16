@@ -61,10 +61,25 @@ class CreateStudentDialog extends React.Component {
       <Mutation
         mutation={CREATE_STUDENT}
         variables={{ data: { name: this.state.name } }}
-        update={(proxy, { data: { getAllStudents } }) => {
-          const data = proxy.readQuery({ query: GET_ALL_STUDENTS });
-          data.students.push(getAllStudents);
-          proxy.writeQuery({ query: GET_ALL_STUDENTS, data });
+        update={(cache, { data: { createStudent } }) => {
+          const { students } = cache.readQuery({ query: GET_ALL_STUDENTS });
+          cache.writeQuery({
+            query: GET_ALL_STUDENTS,
+            data: { students: students.concat([createStudent]) }
+          });
+          const one = cache.readFragment({
+            id: "Student:cjtc3m6nf0ubp0b51z13hdy03",
+            fragment: gql`
+              fragment myTodo on Student {
+                id
+                name
+              }
+            `,
+            data: {
+              name: "OWOWOWOWO"
+            }
+          });
+          console.log(one);
         }}
       >
         {(createStudent, { data }) => (

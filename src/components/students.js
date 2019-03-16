@@ -42,8 +42,8 @@ class Students extends React.Component {
     const compareId = deleteStudent.id;
 
     const result = students.filter(student => {
-      const studenId = student.id;
-      return studenId !== compareId;
+      const studentId = student.id;
+      return studentId !== compareId;
     });
     console.log("result");
     console.log(result);
@@ -57,6 +57,11 @@ class Students extends React.Component {
           id: compareId
         }
       });
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      cache.data.delete(`Student:${compareId}`);
     } catch (err) {
       console.log(err);
     }
