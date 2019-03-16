@@ -3,6 +3,8 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 import CreateStudentButton from "../components/createStudentButton";
+import Student from "../components/student";
+import Students from "../components/students";
 
 const styles = theme => ({
   root: {
@@ -23,6 +25,8 @@ class Calculator extends React.Component {
           Determine the courses and number of credits required to graduate.
         </Typography>
         <CreateStudentButton />
+        <Student />
+        <Students />
       </div>
     );
   }
