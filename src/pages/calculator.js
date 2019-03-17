@@ -17,8 +17,7 @@ const styles = theme => ({
 
 class Calculator extends React.Component {
   state = {
-    open: false,
-    selectedValue: "null"
+    open: false
   };
 
   handleClickOpen = () => {
@@ -27,8 +26,8 @@ class Calculator extends React.Component {
     });
   };
 
-  handleClose = value => {
-    this.setState({ selectedValue: value, open: false });
+  handleClose = () => {
+    this.setState({ open: false });
   };
   render() {
     const { classes } = this.props;
@@ -40,12 +39,8 @@ class Calculator extends React.Component {
         <Typography variant="subtitle1" gutterBottom>
           Determine the courses and number of credits required to graduate.
         </Typography>
-        <CreateStudentButton />
         <Student />
         <Students />
-        <Typography variant="subtitle1">
-          Selected: {this.state.selectedValue}
-        </Typography>
         <br />
         <Button
           variant="contained"

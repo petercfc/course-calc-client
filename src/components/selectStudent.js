@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
-import { Query } from "react-apollo";
+import { ApolloConsumer, Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import Button from "@material-ui/core/Button";
@@ -12,10 +12,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import blue from "@material-ui/core/colors/blue";
+
+import CreateStudentButton from "../components/createStudentButton";
 
 const styles = theme => ({
   avatar: {
@@ -26,11 +29,7 @@ const styles = theme => ({
 
 class SelectStudent extends React.Component {
   handleClose = () => {
-    this.props.onClose(this.props.selectedValue);
-  };
-
-  handleListItemClick = value => {
-    this.props.onClose(value);
+    this.props.onClose();
   };
   render() {
     const { classes, onClose, selectedValue, ...other } = this.props;
@@ -52,44 +51,52 @@ class SelectStudent extends React.Component {
             if (error) return <p>Error :(</p>;
 
             return (
-              <Dialog
-                onClose={this.handleClose}
-                aria-labelledby="simple-dialog-title"
-                {...other}
-              >
-                <DialogTitle id="simple-dialog-title">
-                  Select Student
-                </DialogTitle>
-                <div>
-                  <List>
-                    {data.students.map(student => (
-                      <ListItem
-                        button
-                        onClick={() => this.handleListItemClick(student.name)}
-                        key={student.name}
-                      >
-                        <ListItemAvatar>
-                          <Avatar className={classes.avatar}>
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={student.name} />
-                      </ListItem>
-                    ))}
-                    <ListItem
-                      button
-                      onClick={() => this.handleListItemClick("addAccount")}
-                    >
-                      <ListItemAvatar>
-                        <Avatar>
-                          <AddIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary="add account" />
-                    </ListItem>
-                  </List>
-                </div>
-              </Dialog>
+              <ApolloConsumer>
+                {client => (
+                  <Dialog
+                    onClose={this.handleClose}
+                    aria-labelledby="simple-dialog-title"
+                    {...other}
+                  >
+                    <DialogContent>
+                      <DialogTitle id="simple-dialog-title">
+                        Select Student
+                      </DialogTitle>
+                    </DialogContent>
+                    <div>
+                      <List>
+                        {data.students.map(student => (
+                          <ListItem
+                            button
+                            onClick={() => {
+                              client.writeData({
+                                data: { selectedStudent: student.name }
+                              });
+                              this.handleClose();
+                            }}
+                            key={student.name}
+                          >
+                            <ListItemAvatar>
+                              <Avatar className={classes.avatar}>
+                                <PersonIcon />
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={student.name} />
+                          </ListItem>
+                        ))}
+                        <ListItem>
+                          <ListItemAvatar>
+                            <Avatar>
+                              <AddIcon />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <CreateStudentButton />
+                        </ListItem>
+                      </List>
+                    </div>
+                  </Dialog>
+                )}
+              </ApolloConsumer>
             );
           }}
         </Query>
