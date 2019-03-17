@@ -9,7 +9,10 @@ import { Query, Mutation } from "react-apollo";
 import withRoot from "../withRoot";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+
+import { Button, IconButton } from "@material-ui/core";
+
+import DeleteIcon from "@material-ui/icons/Delete";
 
 // create material-ui styles init with theme
 const styles = theme => ({
@@ -81,16 +84,17 @@ class Students extends React.Component {
                   <div>
                     {data.students.map(student => (
                       <Typography key={student.id} variant="body1" gutterBottom>
-                        {student.name} - {student.id}{" "}
-                        <Button
+                        {student.name}
+                        <IconButton
+                          color="secondary"
                           onClick={() =>
                             deleteStudent({
                               variables: { id: student.id }
                             })
                           }
                         >
-                          Delete
-                        </Button>
+                          <DeleteIcon />
+                        </IconButton>
                       </Typography>
                     ))}
                   </div>

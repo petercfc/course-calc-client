@@ -5,6 +5,8 @@ import withRoot from "../withRoot";
 import CreateStudentButton from "../components/createStudentButton";
 import Student from "../components/student";
 import Students from "../components/students";
+import SelectStudent from "../components/selectStudent";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -14,6 +16,20 @@ const styles = theme => ({
 });
 
 class Calculator extends React.Component {
+  state = {
+    open: false,
+    selectedValue: "null"
+  };
+
+  handleClickOpen = () => {
+    this.setState({
+      open: true
+    });
+  };
+
+  handleClose = value => {
+    this.setState({ selectedValue: value, open: false });
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -27,6 +43,22 @@ class Calculator extends React.Component {
         <CreateStudentButton />
         <Student />
         <Students />
+        <Typography variant="subtitle1">
+          Selected: {this.state.selectedValue}
+        </Typography>
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.handleClickOpen}
+        >
+          Select Student
+        </Button>
+        <SelectStudent
+          selectedValue={this.state.selectedValue}
+          open={this.state.open}
+          onClose={this.handleClose}
+        />
       </div>
     );
   }
