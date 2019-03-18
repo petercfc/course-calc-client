@@ -51,12 +51,7 @@ waitOnCache.then(() => {
       <Index />
     </ApolloProvider>
   );
-
-  if (rootElement.hasChildNodes()) {
-    hydrate(AppBundle, rootElement);
-  } else {
-    render(AppBundle, rootElement);
-  }
+  render(AppBundle, rootElement);
 });
 
 // register service worker

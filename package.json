@@ -21,7 +21,6 @@
     "react-material-ui-form-validator": "^2.0.7",
     "react-router-dom": "^4.4.0",
     "react-scripts": "latest",
-    "react-snap": "^1.23.0",
     "serve": "^10.1.2"
   },
   "scripts": {
