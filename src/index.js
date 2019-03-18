@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render } from "react-dom";
 import Index from "./pages/index";
 import * as serviceWorker from "./serviceWorker";
 
@@ -38,22 +38,25 @@ cache.writeData({
   }
 });
 
-//nuke store
+// nuke store
 // client.clearStore();
 // client.resetStore();
-// cache.writeData({ data });
-//Sets cache to defaults on store reset
 // client.onResetStore(() => cache.writeData({ data }));
 
 // wait for cache to load before init
 waitOnCache.then(() => {
-  // render index page wrapped in apollo client
-  ReactDOM.render(
+  const rootElement = document.querySelector("#root");
+  const AppBundle = (
     <ApolloProvider client={client}>
       <Index />
-    </ApolloProvider>,
-    document.querySelector("#root")
+    </ApolloProvider>
   );
+
+  if (rootElement.hasChildNodes()) {
+    hydrate(AppBundle, rootElement);
+  } else {
+    render(AppBundle, rootElement);
+  }
 });
 
 // register service worker
