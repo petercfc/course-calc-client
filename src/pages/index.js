@@ -1,9 +1,11 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
-import Courses from "./courses";
-import Calculator from "./calculator";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import loadable from "@loadable/component";
+
+const Courses = loadable(() => import("./courses"));
+const Calculator = loadable(() => import("./calculator"));
 
 const styles = theme => ({
   root: {}
