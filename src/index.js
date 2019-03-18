@@ -16,7 +16,7 @@ import { resolvers, typeDefs } from "./resolvers";
 //create link from retry object and http endpoint
 const retry = new RetryLink({ attempts: { max: Infinity } });
 const http = new HttpLink({
-  uri: "https://course-credit-api.herokuapp.com/graphql/"
+  uri: "https://course-credit-calc-api-opxnctrhac.now.sh/"
 });
 const link = concat(retry, http);
 
